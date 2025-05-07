@@ -1,3 +1,4 @@
+# app/config.py
 import os
 from functools import lru_cache
 from typing import List
@@ -17,17 +18,19 @@ class Settings(BaseSettings):
 
     # CORS configuration (Frontend URLs)
     CORS_ORIGINS: List[str] = [
-        "http://localhost:3000",  # Next.js development server
-        "http://localhost:9002",  # Next.js with Turbopack
-        "http://localhost:8080",
-        "https://tomato-vision.example.com",  # Production URL (adjust as needed)
+        "http://localhost:3000",  # Standard Next.js dev server
+        "http://localhost:9002",  # *** Hinzugefügt: Next.js mit Turbopack (aus frontend.txt) ***
+        "http://localhost:8080", # Ggf. weitere
+        "https://tomato-vision.example.com",  # Beispiel Produktions-URL (anpassen)
+        # Fügen Sie hier ggf. weitere URLs hinzu, von denen Anfragen erlaubt sein sollen
     ]
 
-    # Directory for uploaded images
+    # Directory for uploaded images (wird nur kurzzeitig genutzt, wenn Bytes direkt verarbeitet werden)
     UPLOAD_DIR: str = "uploads"
 
-    # Path to ML model
-    MODEL_PATH: str = "model/plant_analysis_model.pkl"
+    # Path to ML model and LabelEncoder
+    MODEL_PATH: str = "app/models/advanced_ml_project_model_test.pkl"
+    LABEL_ENCODER_PATH: str = "app/models/label_encoder_test.pkl"
 
     # Debug mode
     DEBUG: bool = os.getenv("DEBUG", "False").lower() == "true"

@@ -8,16 +8,23 @@ services:
     ports:
       - "8000:8000"
     volumes:
+      # Mountet dein lokales app-Verzeichnis in den Container für Live-Entwicklung.
+      # Die Modelle in app/models werden dadurch auch gemountet.
       - ./app:/app/app
-      - ./model:/app/model
-      - ./uploads:/app/uploads
+      # Das uploads-Verzeichnis ist in config.py definiert, aber da Bilder direkt verarbeitet werden,
+      # ist ein persistentes Volume hierfür ggf. nicht zwingend.
+      # - ./uploads:/app/uploads # Falls die UPLOAD_DIR Variable in settings noch relevant ist.
     environment:
       - DEBUG=true
+      # Hier könnten Sie auch MODEL_PATH und LABEL_ENCODER_PATH als Umgebungsvariablen setzen,
+      # wenn Sie sie in config.py über os.getenv() laden würden.
+      # - MODEL_PATH=/app/app/models/advanced_ml_project_model_test.pkl
+      # - LABEL_ENCODER_PATH=/app/app/models/label_encoder_test.pkl
     networks:
       - tomato-vision-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"] # Oder der tatsächliche Health-Endpunkt-Pfad
       interval: 30s
       timeout: 10s
       retries: 3

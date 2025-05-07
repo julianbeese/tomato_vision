@@ -1,0 +1,9 @@
+docker build -t tomato-vision-backend .
+docker run -d -p 8000:8000 --name tomato-vision-app tomato-vision-backend
+# logs anzeigen
+docker logs -f tomato-vision-app
+
+
+# löschen und neu bauen
+docker stop tomato-vision-app
+docker rm tomato-vision-app
