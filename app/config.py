@@ -31,6 +31,8 @@ class Settings(BaseSettings):
     # Path to ML model and LabelEncoder
     MODEL_PATH: str = "app/models/advanced_ml_project_model_test.pkl"
     LABEL_ENCODER_PATH: str = "app/models/label_encoder_test.pkl"
+    #MODEL_PATH: str = "/Users/julianbeese/Developer/NOVA/tomato_vision/app/models/advanced_ml_project_model_test.pkl"
+    #LABEL_ENCODER_PATH: str = "/Users/julianbeese/Developer/NOVA/tomato_vision/app/models/label_encoder_test.pkl"
 
     # Debug mode
     DEBUG: bool = os.getenv("DEBUG", "False").lower() == "true"
